@@ -1,0 +1,115 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css'%}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/fontawesome-all.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/iofrm-style.css' %}">
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    
+
+    <div class="form-body">
+        <div class="website-logo">
+            <a href="index.html">
+                <div class="logo">
+                    <img class="logo-size" src="images/logo-light.svg" alt="">
+                </div>
+            </a>
+        </div>
+        <div class="row">
+            <div class="img-holder">
+                <div class="bg"></div>
+               
+            </div>
+             <form method="post" action="{% url 'register' %}">
+                {% csrf_token %} 
+            <div class="form-holder">
+                <div class="form-content form-sm" style="padding: 0px;padding-top: 90px;">
+                    <div class="form-items" style="max-width: 370px">
+                        <h3 class="form-title">Complete the form</h3>
+                        <form>
+                            <div class="form-group">
+                                <label>Personal Information</label>
+                                
+                                <input type="hidden" name="username" maxlength="150" autofocus="" value= {{ email }} required="" id="id_username">
+                                <input type="hidden" class="form-control" name="email" required="" id="id_email" placeholder="E-mail Address" value={{ email }} >
+                                <i class="fa fa-check-circle" style="font-size:24px;color: #18e112; float : right;"></i>
+                                <input type="email" class="form-control" name="email" required="" id="id_email" placeholder="E-mail Address" value={{ email }} readonly>
+                                <input type="text" class="form-control" name="first_name" maxlength="30" id="id_first_name" placeholder="First Name" required>
+                                <input type="text" class="form-control" name="last_name" maxlength="150" id="id_last_name" placeholder="Last Name" required><br>
+                                <label>Password Poilcy</label>
+                                <div style="font-size: 12px">
+                                 <li>Your password must contain at least 8 characters.</li><li>Your password can't be a commonly used password.</li><li>Your password can't be entirely numeric.</li></div>
+                                <input type="password" class="form-control" name="password1" required="" id="id_password1" placeholder="Password" required>
+                                
+                                <input type="password" class="form-control" name="password2" required="" id="id_password2" placeholder="Confirm Password" required>
+                                
+                            </div>
+                            <!-- <div class="form-group">
+                                <label>Education</label>
+                                <div class="custom-options">
+                                    <input type="radio" id="rad1" name="rad"><label for="rad1">Master Degree</label>
+                                    <input type="radio" id="rad2" name="rad"><label for="rad2">Bachelor Degree</label>
+                                    <input type="radio" id="rad3" name="rad"><label for="rad3">Diploma</label>
+                                    <input type="radio" id="rad4" name="rad"><label for="rad4">Other</label>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col">
+                                        <input type="text" class="form-control" placeholder="School Name">
+                                    </div>
+                                    <div class="col">
+                                        <input type="text" class="form-control" placeholder="Graduation date">
+                                    </div>
+                                </div>
+                            </div> -->
+                            <!-- <div class="form-group">
+                                <label>Tell us about you in short</label>
+                                <textarea class="form-control"></textarea>
+                            </div> -->
+                            <div class="form-button text-right">
+                                    <button id="submit" type="submit" class="ibtn">Save</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% if form is not None %}
+        {% if form.errors %}
+    
+    {% for field in form %}
+        {% for error in field.errors %}
+            
+                <script >
+                swal("Oops!", "{{ error|escape }}", "error");
+           </script> 
+            
+        {% endfor %}
+    {% endfor %}
+    {% for error in form.non_field_errors %}
+        
+           <script >
+                swal("Oops!", "{{ error|escape }}", "error");
+           </script> 
+        
+    {% endfor %}
+    {% endif %}
+    {% endif %}
+<script src="js/jquery.min.js"></script>
+<script src="js/popper.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/main.js"></script>
+</body>
+
+
+</html>

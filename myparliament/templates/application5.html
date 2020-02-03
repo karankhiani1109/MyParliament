@@ -1,0 +1,106 @@
+{% include 'baseapplication.html' %}
+
+<style > ul{ margin-bottom: 0.5rem;    padding-inline-start: 0px;
+ }</style>
+
+{% if data is not None %}
+{% for i in data %}
+<div class="wrapper">
+          <ul class="steps">
+            <li >Step 1</li>
+            <li  >Step 2</li>
+            <li>Step 3</li>
+            <li >Step 4</li>
+            <li class="is-active">Step 5</li>
+          </ul>
+<div class="form-holder">
+    <div class="form-content">
+        <div class="form-items">
+        <div class="container">
+        
+          <form class="form-wrapper" method="POST" action="{% url 'application2' %}" >
+            {% csrf_token %}
+            <fieldset class="section is-active">
+              <h3 style="margin-bottom: 0px;"> Disclaimer  </h3>
+              		<div class="row">
+                                    <div class="col-12 " >
+                                        <label style="float : left;font-size: 20px;font-weight: 600;">  </label><br>
+                                        <div style="text-align: left; float: left;margin-left: 0px;font-size: 13px;">
+                                           <ol type="1|a|A|i|I">
+                                            <li>The participant hereby declares that all information provided is true to the best of his/her knowledge. </li> 
+
+                                          <li>  Once the fee is paid, no refund will be given where an applicant cannot join the event due to any circumstances. </li>
+                                          <li>  MY Parliament unilaterally reserves all rights to add or modify or cancel any Terms and Conditions of the event at any time without any notice, with or without assigning any reason for the same. This includes rejection of any applicant at any stage of the selection process.</li> 
+                                          <li>  MY Parliament reserves all rights to seek the evidential support documents to authenticate the information declared or claimed by the applicant in the applications submitted, including age, address, phone, education, financial details etc. </li>
+                                          <li>  With respect to the selection of an applicant the decision of the selection committee will be final and details of scores/viewing of application forms/or similar information will be not be entertained.</li>  
+                                          <li>  MY Parliament holds all the rights of cancellation of selection of the applicant if he/she posts false information on public forums, including social media sites, harming the brand of MY Parliament.</li>
+                                          <li>  In no event will we be liable for any loss or damage, indirect or consequential, arising from injury or harm during the event.</li>
+                                          <li>  MY Parliament reserves the right to disqualify any applicant during the event for misconduct or misbehavior. This will be at the sole discretion of the organizing team, and any contribution deposited will not be refunded.</li>
+                                            </ol>
+                                       </div>
+
+                                    </div>
+                                  </div>
+                                            
+                                
+                                
+                                
+                                
+                                <div class="col-12 ">
+                                        <div class="form-button text-right">
+                                            <button id="submit" type="submit" class="ibtn less-padding" style="background-color: #69f0ae;color: #fff;    padding: 8px 20px !important;">Submit</button>
+                                        </div>
+                                    </div>
+            </fieldset>
+
+
+           
+          </form>
+        </div>
+      </div>
+
+
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+{% endfor %}
+
+{% endif %}    
+
+<script >
+    $(document).ready(function(){
+  $(".form-wrapper .button").click(function(){
+    var button = $(this);
+    var currentSection = button.parents(".section");
+    var currentSectionIndex = currentSection.index();
+    var headerSection = $('.steps li').eq(currentSectionIndex);
+    currentSection.removeClass("is-active").next().addClass("is-active");
+    headerSection.removeClass("is-active").next().addClass("is-active");
+
+    $(".form-wrapper").submit(function(e) {
+      e.preventDefault();
+    });
+
+    if(currentSectionIndex === 3){
+      $(document).find(".form-wrapper .section").first().addClass("is-active");
+      $(document).find(".steps li").first().addClass("is-active");
+    }
+  });
+});
+
+</script>
+</body>
+
+</html>
+
+
+

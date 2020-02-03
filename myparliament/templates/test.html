@@ -1,0 +1,44 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+<body>
+	<input type="email" name="email" placeholder = {{ email }}>
+		<input type="number" id="otp" name="otp" min="6" max="6">
+		<button type="submit" name="sendotp" onclick = "otpcheck()" >submit</button>
+		<!-- </form> -->
+		<div id="personalinfo"></div>
+
+<script>
+			$(document).ready(function(){
+		function otpcheck(){
+			
+   
+			var otpE = document.getElementById('otp').value;
+			var otpV = 1234 ;
+			console.log(otpV,otpE);
+			if(otpE  == otpV.toString() ){
+				alert("email verified");
+				 var large = '<form method="post">{% csrf_token %} <input type="hidden" name="csrfmiddlewaretoken" value="ziNdyAGJjv5AqWIQK78tXBvFAMe6V8QZn4t9scydB6tkNf1M9BxcbP2eGO7ZqLvu"><p><label for="id_username">Username:</label> <input type="text" name="username" maxlength="150" autofocus="" required="" id="id_username"> <span class="helptext">Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.</span></p><p><label for="id_first_name">First name:</label> <input type="text" name="first_name" maxlength="30" id="id_first_name"></p><p><label for="id_last_name">Last name:</label> <input type="text" name="last_name" maxlength="150" id="id_last_name"></p><p><label for="id_email">Email:</label> <input type="email" name="email" required="" id="id_email"></p><p><label for="id_password1">Password:</label> <input type="password" name="password1" required="" id="id_password1"> <span class="helptext"></span></p><ul><li>Your password cant be too similar to your other personal information.</li><li>Your password must contain at least 8 characters.</li><li>Your password cant be a commonly used password.</li><li>Your password cant be entirely numeric.</li></ul><p></p><p><label for="id_password2">Password confirmation:</label> <input type="password" name="password2" required="" id="id_password2"> <span class="helptext">Enter the same password as before, for verification.</span></p><button type="submit">Submit</button>    </form>';
+				 // 	$('#personalinfo').append(large);​
+					// $("#otp").hide();
+					// $("#sendotp").hide();
+			}
+			else{
+				alert(otpE);
+				alert(otpV)
+				alert("Enter correct otp");
+			}
+		}
+
+});
+		</script>
+		
+</body>
+</html>
+
+		

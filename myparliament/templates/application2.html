@@ -1,0 +1,118 @@
+{% include 'baseapplication.html' %}
+
+
+
+{% if data is not None %}
+{% for i in data %}
+
+<div class="form-holder">
+    <div class="form-content">
+        <div class="form-items">
+        <div class="container">
+        <div class="wrapper">
+          <ul class="steps">
+            <li >Step 1</li>
+            <li class="is-active" >Step 2</li>
+            <li>Step 3</li>
+          </ul>
+          <form class="form-wrapper" method="POST" action="{% url 'application2' %}" >
+            {% csrf_token %}
+            <fieldset class="section is-active">
+              <h3> General Details </h3>
+                                                  <div class="row">
+                                    <div class="col-12 " >
+                                        <label style="float : left;font-size: 15px;font-weight: 600;">How did you get to know about MY Parliament?</label><br>
+                                        <div style="word-spacing: 5px;text-align: left; float: left;margin-left: 25px;">
+                                             <input type="radio" id="one-rb" name="que1" value="Social Media" {% if i.que1 == 'Social Media'%} checked{% endif %} />
+                                           <label for="one-rb">Social Media (Facebook, LinkedIn, Twitter, Instagram)</label> <br>
+                                           <input type="radio" id="two-rb" name="que1" value="Web Search" {% if i.que1 == 'Web Search'%} checked{% endif %}/>
+                                           <label for="two-rb">Web Search</label><br>
+                                            <input type="radio" id="three-rb" name="que1" value="Recommended by Friend" {% if i.que1 == 'Recommended by Friend'%} checked{% endif %}/>
+                                           <label for="three-rb">Recommended by Friend</label><br>
+                                            <input type="radio" id="four-rb" name="que1" value="Notification in College" {% if i.que1 == 'Notification in College'%} checked{% endif %}/>
+                                           <label for="four-rb">Notification in College</label><br>
+                                            <input type="radio" id="five-rb" name="que1" value="Received our Email" {% if i.que1 == 'Received our Email'%} checked{% endif %}/>
+                                           <label for="five-rb">Received our Email</label><br>
+                                            <input type="radio" id="six-rb" name="que1" value="Other" {% if i.que1 == 'Other'%} checked{% endif %}/>
+                                           <label for="six-rb">Other</label>
+                                       </div>
+
+                                    </div>
+                                    
+                                </div>
+                                <div class="row">
+                                    <div class="col-12 ">
+                                        <label style="float : left;font-size: 15px;font-weight: 600;">Have you previously participated in MY Parliament Initiatives or Simulations? If yes, describe your role. (50 words)</label><br>
+                                        <textarea type="text" class="form-control" name="que2" placeholder="Your answer" >{{ i.que2 }}</textarea>
+                                    </div>
+                                    
+                                </div>
+                                <div class="row">
+                                    <div class="col-12 ">
+                                        <label style="float : left;font-size: 15px;font-weight: 600;">Tell us briefly about yourself (Specify any volunteer work with policy making bodies, if any). How do you think participating in MY Parliament Budget Session 2020 will enrich your career? (200-250 words)</label><br>
+                                        <textarea type="text" class="form-control" name="que3" placeholder="Your answer" >{{ i.que3 }}</textarea>
+                                    </div>
+                                    
+                                </div>
+                                
+                                
+                                <div class="col-12 ">
+                                        <div class="form-button text-right">
+                                            <button id="submit" type="submit" class="ibtn less-padding" style="background-color: #69f0ae;color: #fff;    padding: 8px 20px !important;">Save & Next</button>
+                                        </div>
+                                    </div>
+            </fieldset>
+
+
+           
+          </form>
+        </div>
+      </div>
+
+
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+{% endfor %}
+
+{% endif %}    
+<script src="js/jquery.min.js"></script>
+<script src="js/popper.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/main.js"></script>
+<script >
+    $(document).ready(function(){
+  $(".form-wrapper .button").click(function(){
+    var button = $(this);
+    var currentSection = button.parents(".section");
+    var currentSectionIndex = currentSection.index();
+    var headerSection = $('.steps li').eq(currentSectionIndex);
+    currentSection.removeClass("is-active").next().addClass("is-active");
+    headerSection.removeClass("is-active").next().addClass("is-active");
+
+    $(".form-wrapper").submit(function(e) {
+      e.preventDefault();
+    });
+
+    if(currentSectionIndex === 3){
+      $(document).find(".form-wrapper .section").first().addClass("is-active");
+      $(document).find(".steps li").first().addClass("is-active");
+    }
+  });
+});
+
+</script>
+</body>
+
+</html>
+
+

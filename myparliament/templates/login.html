@@ -1,0 +1,93 @@
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css'%}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/fontawesome-all.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/iofrm-style.css' %}">
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <!-- <link rel="stylesheet" type="text/css" href="{% static 'css/iofrm-theme1.css' %}"> -->
+</head>
+
+<body>
+    <div class="form-body">
+        <div class="website-logo">
+            <a href="index.html">
+                <div class="logo">
+                    <img class="logo-size" src="{% static 'images/registerpageimg1.jpg' %}" alt="">
+                </div>
+            </a>
+        </div>
+        <div class="row">
+            <div class="img-holder">
+                <div class="bg"></div>
+                <div class="info-holder">
+
+                </div>
+            </div>
+            <div class="form-holder">
+                <div class="form-content">
+                    <div class="form-items">
+                        <h3>Login</h3>
+                        <p> Enter your credentials<br>   <label style="color: #ffff0b; font-size : 12px;">Username is same as Email</label></p>
+
+
+
+
+
+                        
+                        
+                        <form  method="POST">
+                        {% csrf_token %}
+                        
+                            {% for err in form.non_field_errors %}
+      
+                         <script >        
+                               swal("Oops!", "{{ err }} ", "error");  
+                         </script> 
+                         {% endfor %}
+                            
+
+                              {% for hidden_field in form.hidden_fields %}
+                              <script >
+                swal("Oops!", "{{ hidden_field.errors }}", "error");
+                swal("Oops!", "{{ hidden_field }}", "error");
+           </script> 
+                                
+                                
+                              {% endfor %}
+                             {% for field in form.visible_fields %}
+                                
+                                    {{ field.label_tag }}    
+                                
+                                {{ field }}
+                               {% endfor %} 
+                            <!-- 
+                            <input class="form-control" type="email" name="username" placeholder="E-mail Address" required>
+                            <input class="form-control" type="password" name="password1" placeholder="Enter Password" required> -->
+                            <div class="form-button full-width">
+                                <button id="submit" type="submit" class="ibtn btn-forget">Login</button>
+                            </div>
+                        </form>
+                       
+                           
+                    </div>
+                   
+                </div>
+            </div>
+        </div>
+    </div>
+<script data-cfasync="false" src="../../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="js/jquery.min.js"></script>
+<script src="js/popper.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/main.js"></script>
+</body>
+{% endblock content %}
+
+</html>

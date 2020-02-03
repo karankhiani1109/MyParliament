@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+
+</head>
+{% block content %}
+
+<body>
+	
+		{% if email is None %}
+		<form action="{% url 'emailotpverify' %}" method="POST">
+		{% csrf_token %} 	
+		Email:<input type="email" name="email">
+		<input type="submit" name="sendotp" >
+		</form>
+		{% else %}
+
+			{{ otp }}
+		<input type="email" name="email" placeholder = {{ email }}>
+		<input type="number" id="otp" name="otp" min="6" max="6">
+		<button type="submit" id="sendotp" name="sendotp" onclick = "otpcheck()" >submit</button>
+		<!-- </form> -->
+		<div id="personalinfo"></div>
+		<script>
+
+		function otpcheck(){
+			
+			var otpE = document.getElementById('otp').value;
+			var otpV = {{ otp }} ;
+			console.log(otpV,otpE);
+			if(otpE  == otpV.toString() ){
+				alert("email verified");
+				
+
+
+					// alert(otpE);
+			}
+			else{
+				alert(otpE);
+				aleert(otpV)
+				alert("Enter correct otp");
+			}
+		}
+		</script>
+		{% endif %}
+</body>
+
+{% endblock %}
+</html>

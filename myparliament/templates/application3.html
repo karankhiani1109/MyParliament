@@ -1,0 +1,146 @@
+{% include 'baseapplication.html' %}
+
+
+
+{% if data is not None %}
+{% for i in data %}
+
+<div class="form-holder">
+    <div class="form-content">
+        <div class="form-items">
+        <div class="container">
+        <div class="wrapper">
+          <ul class="steps">
+            <li >Step 1</li>
+            <li  >Step 2</li>
+            <li class="is-active">Step 3</li>
+          </ul>
+          <form class="form-wrapper" method="POST" action="{% url 'application3' %}" >
+            {% csrf_token %}
+            <fieldset class="section is-active">
+              <h3> Locking Ministerial Positions</h3>
+                                    <div class="row">
+                                    <div class="col-12 " >
+                                        <label style="float : left;font-size: 15px;font-weight: 600;"> Do you want to participate as Cabinet Minister? </label><br>
+                                        <div style="word-spacing: 5px;text-align: left; float: left;margin-left: 25px;">
+                                             <input type="radio" id="one-rb" name="que4" value="YES" required {% if i.que4 == 'YES' %}checked{% endif %} />
+                                           <label for="one-rb">Yes</label> <br>
+                                           <input type="radio" id="two-rb" name="que4" value="NO" {% if i.que4 == 'NO' %}checked{% endif %}/>
+                                           <label for="two-rb">No</label><br>
+                                            
+                                       </div>
+
+                                    </div>
+                                    
+                                </div>
+                                    <div class="row">
+                                    <div class="col-12 " >
+                                        <label style="float : left;font-size: 15px;font-weight: 600;">(If Answer to Above is - YES) Which Ministerial position do you wish to apply for? (MY Parliament has the sole authority to allot any ministry other than your choice, depending upon your application.) </label><br>
+                                        <div style="word-spacing: 5px;text-align: left; float: left;margin-left: 25px;">
+                                             <input type="radio" id="1-rb" name="que5" value="Ministry of Human Resource Development" {% if i.que5 == 'Ministry of Human Resource Development'%} checked{% endif %} required />
+                                           <label for="1-rb">Ministry of Human Resource Development</label> <br>
+                                           <input type="radio" id="2-rb" name="que5" value="Ministry of Women and Child Development" {% if i.que5 == 'Ministry of Women and Child Development'%} checked{% endif %} />
+                                           <label for="2-rb">Ministry of Women and Child Development</label> <br>
+                                           <input type="radio" id="3-rb" name="que5" value="Ministry of Rural development" {% if i.que5 == 'Ministry of Rural development'%} checked{% endif %} />
+                                           <label for="3-rb"> Ministry of Rural development</label> <br>
+                                           <input type="radio" id="4-rb" name="que5" value="Ministry of Social Justice and Empowerment" {% if i.que5 == 'Ministry of Social Justice and Empowerment'%} checked{% endif %} />
+                                           <label for="4-rb">Ministry of Social Justice and Empowerment</label> <br>
+                                           <input type="radio" id="5-rb" name="que5" value="Ministry of Finance" {% if i.que5 == 'Ministry of Finance'%} checked{% endif %} />
+                                           <label for="5-rb">Ministry of Finance</label> <br>
+                                           <input type="radio" id="6-rb" name="que5" value="Ministry of Environment, Forest and Climate Change" {% if i.que5 == 'Ministry of Environment, Forest and Climate Change'%} checked{% endif %} />
+                                           <label for="6-rb">Ministry of Environment, Forest and Climate Change</label> <br>
+                                           <input type="radio" id="7-rb" name="que5" value="Ministry of Micro, Small and Medium Enterprises" {% if i.que5 == 'Ministry of Micro, Small and Medium Enterprises'%} checked{% endif %} />
+                                           <label for="7-rb">Ministry of Micro, Small and Medium Enterprises</label> <br>
+                                           <input type="radio" id="8-rb" name="que5" value="Ministry of Skill Development and Entrepreneurship" {% if i.que5 == 'Ministry of Skill Development and Entrepreneurship'%} checked{% endif %} />
+                                           <label for="8-rb">Ministry of Skill Development and Entrepreneurship</label> <br>
+                                           <input type="radio" id="9-rb" name="que5" value="Ministry of Health and Family Welfare" {% if i.que5 == 'Ministry of Health and Family Welfare'%} checked{% endif %} />
+                                           <label for="9-rb">Ministry of Health and Family Welfare</label> <br>
+                                           <input type="radio" id="10-rb" name="que5" value="Ministry of Youth Affairs and Sports" {% if i.que5 == 'Ministry of Youth Affairs and Sports'%} checked{% endif %} />
+                                           <label for="10-rb">Ministry of Youth Affairs and Sports</label> <br>
+                                           <input type="radio" id="11-rb" name="que5" value="Ministry of Urban Development" {% if i.que5 == 'Ministry of Urban Development'%} checked{% endif %} />
+                                           <label for="11-rb">Ministry of Urban Development</label> <br>
+                                           <input type="radio" id="12-rb" name="que5" value="Ministry of Culture" {% if i.que5 == 'Ministry of Culture'%} checked{% endif %} />
+                                           <label for="12-rb">Ministry of Culture</label> <br>
+                                           <input type="radio" id="13-rb" name="que5" value="NONE for this time. Ill try this next time." {% if i.que5 == 'NONE for this time. Ill try this next time.'%} checked{% endif %} />
+                                           <label for="13-rb">NONE for this time. I'll try this next time.</label> <br>
+                                       </div>
+
+                                    </div>
+                                    
+                                </div>
+                                <div class="row">
+                                    <div class="col-12 ">
+                                        <label style="float : left;font-size: 15px;font-weight: 600;">State your purpose of choosing the particular ministerial position. (150-200 words)</label><br>
+                                        <textarea type="text" class="form-control" name="que6" placeholder="Your answer" >{{ i.que6 }}</textarea>
+                                    </div>
+                                    
+                                </div>
+                                <div class="row">
+                                    <div class="col-12 ">
+                                        <label style="float : left;font-size: 15px;font-weight: 600;"> Outline few recommendations from your ministry to put on the table in the Budget Session 2020. (150 - 200 words)</label><br>
+                                        <textarea type="text" class="form-control" name="que7" placeholder="Your answer" >{{ i.que7 }}</textarea>
+                                    </div>
+                                    
+                                </div>
+                                
+                                
+                                <div class="col-12 ">
+                                        <div class="form-button text-right">
+                                            <button id="submit" type="submit" class="ibtn less-padding" style="background-color: #69f0ae;color: #fff;    padding: 8px 20px !important;">Save & Next</button>
+                                        </div>
+                                    </div>
+            </fieldset>
+
+
+           
+          </form>
+        </div>
+      </div>
+
+
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+{% endfor %}
+
+{% endif %}    
+<script src="js/jquery.min.js"></script>
+<script src="js/popper.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/main.js"></script>
+<script >
+    $(document).ready(function(){
+  $(".form-wrapper .button").click(function(){
+    var button = $(this);
+    var currentSection = button.parents(".section");
+    var currentSectionIndex = currentSection.index();
+    var headerSection = $('.steps li').eq(currentSectionIndex);
+    currentSection.removeClass("is-active").next().addClass("is-active");
+    headerSection.removeClass("is-active").next().addClass("is-active");
+
+    $(".form-wrapper").submit(function(e) {
+      e.preventDefault();
+    });
+
+    if(currentSectionIndex === 3){
+      $(document).find(".form-wrapper .section").first().addClass("is-active");
+      $(document).find(".steps li").first().addClass("is-active");
+    }
+  });
+});
+
+</script>
+</body>
+
+</html>
+
+

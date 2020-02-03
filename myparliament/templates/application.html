@@ -1,0 +1,287 @@
+{% include 'baseapplication.html' %}
+
+
+
+{% if data is not None %}
+{% for i in data %}
+
+<div class="form-holder">
+    <div class="form-content">
+        <div class="form-items">
+        <div class="container">
+        <div class="wrapper">
+          <ul class="steps">
+            <li class="is-active">Step 1</li>
+            <li>Step 2</li>
+            <li>Step 3</li>
+          </ul>
+          <form class="form-wrapper" method="POST" action="{% url 'application1' %}" >
+            {% csrf_token %}
+            <fieldset class="section is-active">
+              <h3>Personal Details</h3>
+                    <div class="row">
+                                    <div class="col-12 col-sm-6">
+                                        <label style="float : left;font-size: 15px;font-weight: 600;">First name:</label><br>
+                                        <input type="text" class="form-control" placeholder="Karan" value= "{{ user.first_name }}" disabled>
+                                    </div>
+                                    <div class="col-12 col-sm-6">
+                                        <label style="float : left;font-size: 15px;font-weight: 600;">Last name:</label><br>
+                                        <input type="text" class="form-control" placeholder="Khiani" value= "{{ user.last_name }}" disabled>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12 col-sm-6">
+                                         <label style="float : left;font-size: 15px;font-weight: 600;">Email Address:</label><br>
+                                        <input type="text" class="form-control" placeholder="example@gmail.com" value="{{ user.email }}" disabled>
+                                    </div>
+                                    {{ data.phnno }}
+                                    <div class="col-12 col-sm-6">
+                                         <label style="float : left;font-size: 15px;font-weight: 600;">Phone Number:</label><br>
+                                        <input type="text" class="form-control" name="phnno" placeholder="987654xxxx" value="{{ i.phnno }}" required >
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12 col-sm-6" >
+                                        <label style="float : left;font-size: 15px;font-weight: 600;">Gender:</label><br>
+                                        <div style="float:left;word-spacing: 5px;">
+                                          <input type="radio" id="male-rb" name="gender" value="male"  {% if i.gender == 'male' %}checked{% endif %}/>
+                                           <label for="male-rb">Male</label>    
+                                        <input type="radio" id="female-rb" name="gender" value="female"  {% if i.gender == 'female' %}checked {% endif %}/>
+                                           <label for="female-rb">Female</label>
+                                           <input type="radio" id="other-rb" name="gender" value="other" {% if i.gender == 'other' %}checked {% endif %} />
+                                           <label for="other-rb">Other</label>
+                                       </div>
+
+
+                                    </div>
+                                    <div class="col-12 col-sm-6">
+                                         <label style="float : left;font-size: 15px;font-weight: 600;">DOB(Date of Birth):</label><br>
+                                        <input type="date" class="form-control" name="Date" required>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12 ">
+                                         <label style="float : left;font-size: 15px;font-weight: 600;">Full Address:</label><br>
+                                        <textarea type="text" class="form-control" name="fulladdd" placeholder="Full Address" required>{{ i.fulladdd}}</textarea>
+                                    </div>
+                                    
+                                </div>
+                                <div class="row">
+                                    <div class="col-12 col-sm-6">
+                                        <label style="float : left;font-size: 15px;font-weight: 600;">City:</label><br>
+                                        <input type="text" class="form-control" name="city" placeholder="City" value="{{ i.city }}" required>
+                                    </div>
+                                    <div class="col-12 col-sm-6">
+                                        <label style="float : left;font-size: 15px;font-weight: 600;">State:</label><br>
+                                        <input class="form-control" name="state" placeholder="State" value="{{ i.state }}" required></input>
+                                    </div>
+
+                                </div>
+                                <div class="row">
+                                    <div class="col-12 col-sm-6" >
+
+                                        <label style="float : left;font-size: 15px;font-weight: 600;">Level of Education:</label><br>
+                                        <div style="float:left;word-spacing: 5px;    text-align: left;">
+                                           <input type="radio" id="one-rb" name="education" value="Matriculation" {% if i.LOE == 'Matriculation' %}checked{% endif %} />
+                                           <label for="one-rb">Matriculation</label>    <br>
+                                           <input type="radio" id="two-rb" name="education" value="Higher Secondry" {% if i.LOE == 'Higher Secondry' %}checked{% endif %} />
+                                           <label for="two-rb">Higher Secondry</label><br>
+                                            <input type="radio" id="three-rb" name="education" value="Graduation" {% if i.LOE == 'Graduation' %}checked{% endif %} />
+                                           <label for="three-rb">Graduation</label><br>
+                                           <input type="radio" id="four-rb" name="education" value="Post Graduation" {% if i.LOE == 'Post Graduation' %}checked{% endif %} />
+                                           <label for="four-rb">Post Graduation</label><br>
+                                           <input type="radio" id="five-rb" name="education" value="other" {% if i.LOE == 'other' %}checked{% endif %} />
+                                           <label for="five-rb">Other</label>
+                                       </div>
+
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12 col-sm-6">
+                                        <label style="float : left;font-size: 15px;font-weight: 600;">Field of Study:</label><br>
+                                        <input type="text" class="form-control" name="FOS" placeholder="Field of Study " value="{{ i.FOS }}" required>
+                                    </div>
+                                    <div class="col-12 col-sm-6">
+                                        <label style="float : left;font-size: 15px;font-weight: 600;">Institution/University:</label><br>
+                                        <input class="form-control" name="institute" placeholder="Institution/University" value="{{ i.Institute }}" required></input>
+                                    </div>
+
+                                </div>
+                                
+                                
+                                <div class="col-12 ">
+                                        <div class="form-button text-right">
+                                            <button id="submit" type="submit" class="ibtn less-padding" style="background-color: #69f0ae;color: #fff;    padding: 8px 20px !important;">Update</button>
+                                        </div>
+                                    </div>
+            </fieldset>
+
+
+           
+          </form>
+        </div>
+      </div>
+
+
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+{% endfor %}
+
+
+{% else %}
+<div class="form-holder">
+    <div class="form-content">
+        <div class="form-items">
+        <div class="container">
+        <div class="wrapper">
+          <ul class="steps">
+            <li class="is-active">Step 1</li>
+            <li>Step 2</li>
+            <li>Step 3</li>
+          </ul>
+          <form class="form-wrapper" method="POST" action="{% url 'application1' %}" >
+            {% csrf_token %}
+            <fieldset class="section is-active">
+              <h3>Personal Details</h3>
+                    <div class="row">
+                                    <div class="col-12 col-sm-6">
+                                        <input type="text" class="form-control" placeholder="First name" value= "{{ user.first_name }}" disabled>
+                                    </div>
+                                    <div class="col-12 col-sm-6">
+                                        <input type="text" class="form-control" placeholder="Last name" value= "{{ user.last_name }}" disabled>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12 col-sm-6">
+                                        <input type="text" class="form-control" placeholder="E-mail Address" value="{{ user.email }}" disabled>
+                                    </div>
+                                    <div class="col-12 col-sm-6">
+                                        <input type="text" class="form-control" name="phnno" placeholder="Phone Number" required >
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12 col-sm-6" >
+                                        <label style="float : left;font-size: 15px;font-weight: 600;">Gender:</label><br>
+                                        <div style="float:left;word-spacing: 5px;">
+                                           <input type="radio" id="male-rb" name="gender" value="male" />
+                                           <label for="male-rb">Male</label>    
+                                           <input type="radio" id="female-rb" name="gender" value="female" />
+                                           <label for="female-rb">Female</label>
+                                            <input type="radio" id="other-rb" name="gender" value="other" />
+                                           <label for="other-rb">Other</label>
+                                       </div>
+
+                                    </div>
+                                    <div class="col-12 col-sm-6">
+                                         <label style="float : left;font-size: 15px;font-weight: 600;">DOB(Date of Birth):</label><br>
+                                        <input type="date" class="form-control" name="Date" required>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12 ">
+                                        <textarea type="text" class="form-control" name="fulladdd" placeholder="Full Address" required></textarea>
+                                    </div>
+                                    
+                                </div>
+                                <div class="row">
+                                    <div class="col-12 col-sm-6">
+                                        <input type="text" class="form-control" name="city" placeholder="City" required>
+                                    </div>
+                                    <div class="col-12 col-sm-6">
+                                        <input class="form-control" name="state" placeholder="State" required></input>
+                                    </div>
+
+                                </div>
+                                <div class="row">
+                                    <div class="col-12 col-sm-6" >
+                                        <label style="float : left;font-size: 15px;font-weight: 600;">Level of Education:</label><br>
+                                        <div style="float:left;word-spacing: 5px;    text-align: left;">
+                                           <input type="radio" id="one-rb" name="education" value="Matriculation" />
+                                           <label for="one-rb">Matriculation</label>    <br>
+                                           <input type="radio" id="two-rb" name="education" value="Higher Secondry" />
+                                           <label for="two-rb">Higher Secondry</label><br>
+                                            <input type="radio" id="three-rb" name="education" value="Graduation" />
+                                           <label for="three-rb">Graduation</label><br>
+                                           <input type="radio" id="four-rb" name="education" value="Post Graduation" />
+                                           <label for="four-rb">Post Graduation</label><br>
+                                           <input type="radio" id="five-rb" name="education" value="other" />
+                                           <label for="five-rb">Other</label>
+                                       </div>
+
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12 col-sm-6">
+                                        <input type="text" class="form-control" name="FOS" placeholder="Field of Study " required>
+                                    </div>
+                                    <div class="col-12 col-sm-6">
+                                        <input class="form-control" name="institute" placeholder="Institution/University" required></input>
+                                    </div>
+
+                                </div>
+                                
+                                
+                                <div class="col-12 ">
+                                        <div class="form-button text-right">
+                                            <button id="submit" type="submit" class="ibtn less-padding" style="background-color: #69f0ae;color: #fff;    padding: 8px 20px !important;">Next</button>
+                                        </div>
+                                    </div>
+            </fieldset>
+
+
+           
+          </form>
+        </div>
+      </div>
+
+
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endif %}    
+<script src="js/jquery.min.js"></script>
+<script src="js/popper.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/main.js"></script>
+<script >
+    $(document).ready(function(){
+  $(".form-wrapper .button").click(function(){
+    var button = $(this);
+    var currentSection = button.parents(".section");
+    var currentSectionIndex = currentSection.index();
+    var headerSection = $('.steps li').eq(currentSectionIndex);
+    currentSection.removeClass("is-active").next().addClass("is-active");
+    headerSection.removeClass("is-active").next().addClass("is-active");
+
+    $(".form-wrapper").submit(function(e) {
+      e.preventDefault();
+    });
+
+    if(currentSectionIndex === 3){
+      $(document).find(".form-wrapper .section").first().addClass("is-active");
+      $(document).find(".steps li").first().addClass("is-active");
+    }
+  });
+});
+
+</script>
+</body>
+
+</html>
+
+

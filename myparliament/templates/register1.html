@@ -1,0 +1,117 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email verification</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css'%}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/fontawesome-all.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/iofrm-style.css' %}">
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <!-- <link rel="stylesheet" type="text/css" href="{% static 'css/iofrm-theme1.css' %}"> -->
+</head>
+
+<body>
+    <div class="form-body">
+        <div class="website-logo">
+            <a href="index.html">
+                <div class="logo">
+                    <img class="logo-size" src="{% static 'images/registerpageimg1.jpg' %}" alt="">
+                </div>
+            </a>
+        </div>
+        <div class="row">
+            <div class="img-holder">
+                <div class="bg"></div>
+                <div class="info-holder">
+
+                </div>
+            </div>
+            <div class="form-holder">
+                <div class="form-content">
+                    <div class="form-items">
+                        <h3>Email Verification</h3>
+                        <p> Enter the email address you want to register for My Parliament</p>
+                        {% if email is None %}
+                        <form action="{% url 'emailotpverify' %}" method="POST">
+                        {% csrf_token %}
+                            <input class="form-control" type="email" name="email" placeholder="E-mail Address" required>
+                            <div class="form-button full-width">
+                                <button id="submit" type="submit" class="ibtn btn-forget">Send OTP</button>
+                            </div>
+                        </form>
+                        {% else %}
+                         <form action="{% url 'emailotpverify' %}" method="POST">
+                            {% csrf_token %}
+                            <input class="form-control" type="email" name="email" placeholder="E-mail Address" value= {{ email }}  required>
+                            <div class="form-button full-width" >
+                                <button id="submit" type="submit" class="ibtn1 ibtn btn-forget" style="border-radius: 6px;">Resend OTP</button>
+                            </div>
+                            </form>
+                            <input class="form-control" type="text" id="otp" name="otp" placeholder="Enter OTP here" max="6" required>
+                            <div class="form-button full-width">
+                                <button id="submit" type="submit" onclick="otpcheck()" class="ibtn btn-forget">Submit</button>
+                            </div>
+                            <script>
+
+                            function otpcheck(){
+                                
+                                var otpE = document.getElementById('otp').value;
+                                var otpV = {{ otp }} ;
+                                console.log(otpV,otpE);
+                                if(otpE  == otpV.toString() ){
+                                    // swal("Good job!", "You email is verified!", "success");
+                                    nextpage();
+
+                                        // alert(otpE);
+                                }
+                                else{
+                                    swal("Oops!", "Wrong OTP", "error");
+                                }
+                            }
+
+
+                            function nextpage(){
+                                var email = '{{ email }}';
+                                swal("Good job!", "You email is verified!", "success");
+                                    // window.location ='/register/?email=' + email;
+                                    let form = document.createElement('form');
+                                    form.action = '{% url 'emailotpverify' %}';
+                                    form.method = 'POST';
+                                    form.innerHTML = '{% csrf_token %}' + ' <input name="email" value='+email+' ><input name="isverified" value= True >' ;
+
+                                    // the form must be in the document to submit it
+                                    document.body.append(form);
+                                    console.log(form);
+                                    form.submit();
+                            }
+                             </script>
+                        {% endif %}
+                    </div>
+                    <div class="form-sent">
+                        <div class="tick-holder">
+                            <div class="tick-icon"></div>
+                        </div>
+                        <h3>Password link sent</h3>
+                        <p>Please check your inbox <a href="http://brandio.io/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="89e0e6effbe4c9e0e6effbe4fdece4f9e5e8fdeca7e0e6">[email&#160;protected]</a></p>
+                        <div class="info-holder">
+                            <span>Unsure if that email address was correct?</span> <a href="#">We can help</a>.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{ messages }}
+<script data-cfasync="false" src="../../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="js/jquery.min.js"></script>
+<!-- <script src="js/popper.min.js"></script> -->
+<!-- <script src="js/bootstrap.min.js"></script> -->
+<!-- <script src="js/main.js"></script> -->
+</body>
+
+
+</html>
